@@ -1,0 +1,15 @@
+# Created by .ignore support plugin (hsz.mobi)
+DoTestow
+ISIC_2019_Training_Input
+Sieci_wyniki
+TestData
+TrainingData
+TrainingData — backup
+ValidationData
+venv
+MP.png
+NazwyKlasy.xlsx
+parametry_sieci_resnet18.pth
+ResNet18-uczenie
+Resnet-101_first_training.png
+Wyniki_Testu.txt
