@@ -32,6 +32,7 @@ from torchsampler import ImbalancedDatasetSampler
 class_name = {0: 'AK', 1: 'BCC', 2: 'BKL', 3: 'DF', 4: 'MEL', 5: 'NV', 6: 'SCC', 7: 'VASC'}  # Slownik class_name[identyfikator_klasy]
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 main_dir_path = os.path.dirname(os.path.realpath(__file__))
+nazwa_sieci = "ResNext50"  # "ResNet18"  # EfficientNet
 
 # ===== Windows =====
 # train_data_path = ''.join([main_dir_path, '\\', 'TrainingData'])
@@ -235,8 +236,9 @@ def main(argv):
     # net_resnet101 = models.resnet101(pretrained=True)
     # net_resnet152 = models.resnet152(pretrained=False)
     # net_inception_v3 = models.inception_v3(pretrained=True)
+    net_resnext50 = models.resnext50_32x4d(pretrained=True)
     
-    net = net_resnet18   # net_resnet34   # net_resnet101   net_resnet152   net_inception_v3
+    net = net_resnext50  # net_resnet18   # net_resnet34   # net_resnet101   net_resnet152   net_inception_v3
 
     # Zamrozenie parametrow sieci jest potrzebne w przypadku gdy model jest pretrenowany.
     # Jesli trening jest od poczatku nie zamrazamy parametrow.
@@ -390,7 +392,7 @@ def train_model(net, train_gen, val_gen, num_epochs, lr, save_dir_path, weight_d
             # Zapis najlepszej sieci
             if correct_val_perc[epoch] > best_val:
                 best_val = correct_val_perc[epoch]
-                path = ''.join([save_dir_path, '{}'.format(epoch), '_parametry_sieci_resnet34.pth'])
+                path = ''.join([save_dir_path, '{}'.format(epoch), '_parametry_sieci_', nazwa_sieci, '.pth'])
                 torch.save(net, path)
 
             # Wyswietlanie komunikatu o postepach nauki
